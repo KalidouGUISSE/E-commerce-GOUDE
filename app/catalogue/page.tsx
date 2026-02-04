@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Filter, X, Lock, ChevronDown, Grid3X3, List } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -163,15 +164,21 @@ function ProductCard({ product, viewMode }: { product: typeof products[0]; viewM
   const originLabel = productOrigins.find(o => o.value === product.origin)?.label || product.origin
   const unitLabel = productUnits.find(u => u.value === product.unit)?.label || product.unit
 
+  const imageSrc = product.images[0] || "/placeholder.jpg"
+
   if (viewMode === "list") {
     return (
       <Link href={`/catalogue/${product.id}`}>
         <Card className="group transition-shadow hover:shadow-md">
           <CardContent className="flex gap-4 p-4">
             <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-muted">
-              <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
-                <span className="text-2xl font-bold text-primary/30">{product.name[0]}</span>
-              </div>
+              <Image
+                src={imageSrc}
+                alt={product.name}
+                fill
+                className="object-cover"
+                sizes="96px"
+              />
               {!product.inStock && (
                 <div className="absolute inset-0 flex items-center justify-center bg-foreground/60">
                   <span className="text-xs font-medium text-background">Rupture</span>
@@ -212,9 +219,13 @@ function ProductCard({ product, viewMode }: { product: typeof products[0]; viewM
     <Link href={`/catalogue/${product.id}`}>
       <Card className="group h-full overflow-hidden transition-shadow hover:shadow-md">
         <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-          <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
-            <span className="text-4xl font-bold text-primary/30">{product.name[0]}</span>
-          </div>
+          <Image
+            src={imageSrc}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
           {!product.inStock && (
             <div className="absolute inset-0 flex items-center justify-center bg-foreground/60">
               <span className="text-sm font-medium text-background">Rupture de stock</span>

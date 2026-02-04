@@ -5,59 +5,27 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import db from "@/lib/data/db.json"
 
-const features = [
-  {
-    icon: Shield,
-    title: "Qualité Certifiée",
-    description: "Tous nos tissus proviennent d'artisans vérifiés avec des certificats d'authenticité.",
-  },
-  {
-    icon: Truck,
-    title: "Livraison Fiable",
-    description: "Expédition nationale et internationale avec suivi complet de vos commandes.",
-  },
-  {
-    icon: Users,
-    title: "Réseau d'Artisans",
-    description: "Plus de 200 tisserands certifiés à travers le Sénégal et l'Afrique de l'Ouest.",
-  },
-  {
-    icon: Award,
-    title: "Prix Grossiste",
-    description: "Tarifs préférentiels pour les revendeurs avec des quantités minimum adaptées.",
-  },
-]
+const features = db.features
+const categories = db.categories
+const stats = db.stats
+const howItWorks = db.howItWorks
 
-const categories = [
-  {
-    name: "Pagne Manjak",
-    origin: "Casamance",
-    image: "/images/manjak.jpg",
-  },
-  {
-    name: "Pagne Sérère",
-    origin: "Sine-Saloum",
-    image: "/images/serere.jpg",
-  },
-  {
-    name: "Thioup",
-    origin: "Sénégal",
-    image: "/images/thioup.jpg",
-  },
-  {
-    name: "Kente",
-    origin: "Ghana",
-    image: "/images/kente.jpg",
-  },
-]
+// Icon mapping
+const iconMap: Record<string, typeof Shield> = {
+  Shield,
+  Truck,
+  Users,
+  Award,
+}
 
-const stats = [
-  { value: "200+", label: "Artisans Partenaires" },
-  { value: "15K+", label: "Pièces en Stock" },
-  { value: "500+", label: "Revendeurs Actifs" },
-  { value: "12", label: "Pays Livrés" },
-]
+// Helper component to render icon from string
+function FeatureIcon({ name, className }: { name: string; className?: string }) {
+  const Icon = iconMap[name]
+  if (!Icon) return null
+  return <Icon className={className} />
+}
 
 export default function HomePage() {
   return (
@@ -121,12 +89,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                { step: "1", title: "Inscription", desc: "Créez votre compte revendeur en quelques minutes" },
-                { step: "2", title: "Validation", desc: "Notre équipe vérifie votre profil professionnel" },
-                { step: "3", title: "Commande", desc: "Accédez aux prix grossiste et passez commande" },
-                { step: "4", title: "Livraison", desc: "Recevez vos tissus avec suivi complet" },
-              ].map((item) => (
+              {howItWorks.map((item) => (
                 <div key={item.step} className="relative text-center">
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
                     {item.step}
@@ -163,9 +126,13 @@ export default function HomePage() {
                 <Link key={category.name} href={`/catalogue?type=${category.name.toLowerCase()}`}>
                   <Card className="group overflow-hidden transition-shadow hover:shadow-lg">
                     <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                      <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
-                        <span className="text-4xl font-bold text-primary/30">{category.name[0]}</span>
-                      </div>
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      />
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-foreground group-hover:text-primary">
@@ -196,7 +163,7 @@ export default function HomePage() {
                 <Card key={feature.title} className="border-0 bg-muted/50">
                   <CardContent className="p-6">
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                      <feature.icon className="h-6 w-6 text-primary" />
+                      <FeatureIcon name={feature.icon} className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="mt-4 font-semibold text-foreground">{feature.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

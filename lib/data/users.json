@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@pagnetisse.sn",
+      "password": "admin123",
+      "name": "Admin Pagne Tissé",
+      "role": "admin",
+      "company": "Pagne Tissé Distribution",
+      "createdAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "2",
+      "email": "revendeur@test.com",
+      "password": "test123",
+      "name": "Jean Dupont",
+      "role": "reseller",
+      "company": "Dupont Textiles",
+      "createdAt": "2024-06-15T10:30:00Z"
+    },
+    {
+      "id": "3",
+      "email": "revendeur2@test.com",
+      "password": "test123",
+      "name": "Marie Traoré",
+      "role": "reseller",
+      "company": "Africa Style SARL",
+      "createdAt": "2024-07-20T14:45:00Z"
+    }
+  ],
+  "meta": {
+    "totalUsers": 3,
+    "lastUpdated": "2024-12-01T00:00:00Z"
+  }
+}
