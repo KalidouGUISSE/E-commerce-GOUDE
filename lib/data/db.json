@@ -1,274 +1,516 @@
 {
+  "roles": [
+    { "id": 1, "name": "admin", "description": "Administrateur système" },
+    { "id": 2, "name": "reseller", "description": "Revendeur" },
+    { "id": 3, "name": "artisan", "description": "Artisan" }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role_id": 1,
+      "first_name": "Admin",
+      "last_name": "Pagne Tissé",
+      "email": "admin@pagnetisse.sn",
+      "phone": "+221 77 123 45 67",
+      "password_hash": "admin123",
+      "language": "fr",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "role_id": 2,
+      "first_name": "Jean",
+      "last_name": "Dupont",
+      "email": "revendeur@test.com",
+      "phone": "+221 77 234 56 78",
+      "password_hash": "test123",
+      "language": "fr",
+      "is_active": true,
+      "created_at": "2024-06-15T10:30:00Z"
+    },
+    {
+      "id": 3,
+      "role_id": 3,
+      "first_name": "Mariama",
+      "last_name": "Diatta",
+      "email": "artisan@diatta.sn",
+      "phone": "+221 77 345 67 89",
+      "password_hash": "artisan123",
+      "language": "fr",
+      "is_active": true,
+      "created_at": "2024-03-20T14:00:00Z"
+    }
+  ],
+  "resellers": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "company_name": "Dupont Textiles",
+      "country": "Sénégal",
+      "city": "Dakar",
+      "address": "Rue 10, Sacré Coeur I",
+      "verified": true,
+      "is_international": false,
+      "created_at": "2024-06-15T10:30:00Z"
+    }
+  ],
+  "artisans": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "name": "Atelier Diatta",
+      "region": "Casamance",
+      "village": "Ziguinchor",
+      "speciality": "Tissage Manjak",
+      "rating": 4.8,
+      "is_active": true,
+      "created_at": "2024-03-20T14:00:00Z"
+    }
+  ],
+  "product_types": [
+    { "id": 1, "name": "Tissu" },
+    { "id": 2, "name": "Pagne" },
+    { "id": 3, "name": "Accessoire" }
+  ],
+  "categories": [
+    { "id": 1, "name": "Pagne Manjak", "parent_id": 2 },
+    { "id": 2, "name": "Pagne Sérère", "parent_id": 2 },
+    { "id": 3, "name": "Thioup", "parent_id": 2 },
+    { "id": 4, "name": "Kente", "parent_id": 1 },
+    { "id": 5, "name": "Bogolan", "parent_id": 1 },
+    { "id": 6, "name": "Bazin", "parent_id": 1 }
+  ],
   "products": [
     {
-      "id": "1",
+      "id": 1,
+      "product_type_id": 2,
+      "category_id": 1,
+      "artisan_id": 1,
       "name": "Pagne Manjak Traditionnel Indigo",
+      "slug": "pagne-manjak-traditionnel-indigo",
+      "description": "Pagne manjak authentique tissé à la main selon les techniques traditionnelles de Casamance.",
+      "origin_region": "Casamance",
+      "is_active": true,
+      "created_at": "2024-04-01T00:00:00Z",
       "type": "manjak",
       "origin": "casamance",
       "colors": ["indigo", "blanc"],
       "unit": "piece",
       "minQuantity": 10,
-      "artisanId": "art-1",
       "artisanName": "Atelier Diatta",
-      "description": "Pagne manjak authentique tissé à la main selon les techniques traditionnelles de Casamance. Motifs géométriques classiques sur fond indigo profond.",
+      "images": ["/images/products/image1.png"],
+      "inStock": true,
+      "featured": true,
       "specifications": {
         "width": "120 cm",
         "length": "180 cm",
         "material": "100% Coton",
         "technique": "Tissage traditionnel"
-      },
-      "images": ["/images/products/image1.png"],
-      "inStock": true,
-      "featured": true
+      }
     },
     {
-      "id": "2",
+      "id": 2,
+      "product_type_id": 2,
+      "category_id": 2,
+      "artisan_id": 1,
       "name": "Pagne Sérère Cérémonial",
+      "slug": "pagne-serere-ceremonial",
+      "description": "Pagne sérère de cérémonie avec motifs symboliques traditionnels.",
+      "origin_region": "Sine-Saloum",
+      "is_active": true,
+      "created_at": "2024-04-02T00:00:00Z",
       "type": "serere",
       "origin": "sine-saloum",
       "colors": ["noir", "ocre", "blanc"],
       "unit": "piece",
       "minQuantity": 5,
-      "artisanId": "art-2",
       "artisanName": "Coopérative Ndofane",
-      "description": "Pagne sérère de cérémonie avec motifs symboliques traditionnels. Utilisé pour les grandes occasions et événements culturels.",
+      "images": ["/images/products/image.png"],
+      "inStock": true,
+      "featured": true,
       "specifications": {
         "width": "110 cm",
         "length": "200 cm",
         "material": "Coton et soie",
         "technique": "Tissage sur métier traditionnel"
-      },
-      "images": ["/images/products/image.png", "/images/products/image1.png"],
-      "inStock": true,
-      "featured": true
+      }
     },
     {
-      "id": "3",
+      "id": 3,
+      "product_type_id": 2,
+      "category_id": 3,
+      "artisan_id": 1,
       "name": "Thioup Dakarois Moderne",
+      "slug": "thioup-dakarois-moderne",
+      "description": "Thioup contemporain alliant motifs traditionnels et couleurs modernes.",
+      "origin_region": "Dakar",
+      "is_active": true,
+      "created_at": "2024-04-03T00:00:00Z",
       "type": "thioup",
       "origin": "dakar",
       "colors": ["multicolore"],
       "unit": "piece",
       "minQuantity": 20,
-      "artisanId": "art-3",
       "artisanName": "Maison Seck",
-      "description": "Thioup contemporain alliant motifs traditionnels et couleurs modernes. Parfait pour la mode urbaine.",
+      "images": ["/images/products/image2.png"],
+      "inStock": true,
+      "featured": false,
       "specifications": {
         "width": "100 cm",
         "length": "150 cm",
         "material": "100% Coton",
         "technique": "Tissage semi-mécanisé"
-      },
-      "images": ["/images/products/image2.png", "/images/products/image.png"],
-      "inStock": true,
-      "featured": false
+      }
     },
     {
-      "id": "4",
+      "id": 4,
+      "product_type_id": 1,
+      "category_id": 4,
+      "artisan_id": 1,
       "name": "Kente Royal Ghana",
+      "slug": "kente-royal-ghana",
+      "description": "Kente authentique du Ghana avec motifs royaux traditionnels.",
+      "origin_region": "Ghana",
+      "is_active": true,
+      "created_at": "2024-04-04T00:00:00Z",
       "type": "kente",
       "origin": "ghana",
       "colors": ["ocre", "rouge", "vert", "noir"],
       "unit": "piece",
       "minQuantity": 5,
-      "artisanId": "art-4",
       "artisanName": "Atelier Ashanti",
-      "description": "Kente authentique du Ghana avec motifs royaux traditionnels. Chaque pièce raconte une histoire.",
+      "images": ["/images/products/image.png"],
+      "inStock": true,
+      "featured": true,
       "specifications": {
         "width": "130 cm",
         "length": "220 cm",
         "material": "Soie et coton",
         "technique": "Tissage manuel Ashanti"
-      },
-      "images": ["/images/products/image.png"],
-      "inStock": true,
-      "featured": true
+      }
     },
     {
-      "id": "5",
+      "id": 5,
+      "product_type_id": 1,
+      "category_id": 5,
+      "artisan_id": 1,
       "name": "Bogolan Authentique Mali",
+      "slug": "bogolan-authentique-mali",
+      "description": "Bogolan traditionnel du Mali teint à la boue selon les méthodes ancestrales.",
+      "origin_region": "Mali",
+      "is_active": true,
+      "created_at": "2024-04-05T00:00:00Z",
       "type": "bogolan",
       "origin": "mali",
       "colors": ["ocre", "noir", "blanc"],
       "unit": "piece",
       "minQuantity": 10,
-      "artisanId": "art-5",
       "artisanName": "Groupement Ségou",
-      "description": "Bogolan traditionnel du Mali teint à la boue selon les méthodes ancestrales. Motifs symboliques Bambara.",
+      "images": ["/images/products/image1.png"],
+      "inStock": true,
+      "featured": false,
       "specifications": {
         "width": "150 cm",
         "length": "200 cm",
         "material": "100% Coton",
         "technique": "Teinture à la boue fermentée"
-      },
-      "images": ["/images/products/image1.png"],
-      "inStock": true,
-      "featured": false
+      }
     },
     {
-      "id": "6",
+      "id": 6,
+      "product_type_id": 1,
+      "category_id": 6,
+      "artisan_id": 1,
       "name": "Bazin Riche Brocart",
+      "slug": "bazin-riche-brocart",
+      "description": "Bazin riche de qualité supérieure avec finition brocart.",
+      "origin_region": "Dakar",
+      "is_active": true,
+      "created_at": "2024-04-06T00:00:00Z",
       "type": "bazin",
       "origin": "dakar",
       "colors": ["blanc", "indigo"],
       "unit": "bobine",
       "minQuantity": 5,
-      "artisanId": "art-6",
       "artisanName": "Teinturerie Ndiaye",
-      "description": "Bazin riche de qualité supérieure avec finition brocart. Idéal pour les tenues de cérémonie.",
+      "images": ["/images/products/image2.png"],
+      "inStock": true,
+      "featured": true,
       "specifications": {
         "width": "160 cm",
         "length": "10 m par bobine",
         "material": "100% Coton damassé",
         "technique": "Teinture et lustrage artisanal"
-      },
-      "images": ["/images/products/image2.png"],
-      "inStock": true,
-      "featured": true
-    },
-    {
-      "id": "7",
-      "name": "Pagne Manjak Festif",
-      "type": "manjak",
-      "origin": "casamance",
-      "colors": ["rouge", "ocre", "noir"],
-      "unit": "piece",
-      "minQuantity": 10,
-      "artisanId": "art-1",
-      "artisanName": "Atelier Diatta",
-      "description": "Pagne manjak aux couleurs vives pour les célébrations. Tissage serré de haute qualité.",
-      "specifications": {
-        "width": "120 cm",
-        "length": "180 cm",
-        "material": "100% Coton",
-        "technique": "Tissage traditionnel"
-      },
-      "images": ["/images/products/image.png"],
-      "inStock": true,
-      "featured": false
-    },
-    {
-      "id": "8",
-      "name": "Lot Thioup Assorti",
-      "type": "thioup",
-      "origin": "thies",
-      "colors": ["multicolore"],
-      "unit": "lot",
-      "minQuantity": 3,
-      "artisanId": "art-7",
-      "artisanName": "Atelier Thiès Textile",
-      "description": "Lot de 5 thioup assortis aux motifs variés. Parfait pour les revendeurs débutants.",
-      "specifications": {
-        "width": "100 cm",
-        "length": "150 cm",
-        "material": "100% Coton",
-        "technique": "Tissage semi-mécanisé"
-      },
-      "images": ["/images/products/image1.png"],
-      "inStock": true,
-      "featured": false
+      }
     }
   ],
-  "artisans": [
+  "product_variants": [
     {
-      "id": "art-1",
-      "name": "Atelier Diatta",
-      "location": "Ziguinchor",
-      "region": "Casamance",
-      "specialty": "Pagne Manjak",
-      "yearsExperience": 35,
-      "certified": true,
-      "bio": "Famille de tisserands depuis trois générations, l'Atelier Diatta perpétue les techniques ancestrales du tissage manjak.",
-      "productsCount": 45
+      "id": 1,
+      "product_id": 1,
+      "color": "Indigo",
+      "pattern": "Géométrique",
+      "length_cm": 180,
+      "width_cm": 120,
+      "density": "Moyenne",
+      "created_at": "2024-04-01T00:00:00Z"
     },
     {
-      "id": "art-2",
-      "name": "Coopérative Ndofane",
-      "location": "Fatick",
-      "region": "Sine-Saloum",
-      "specialty": "Pagne Sérère",
-      "yearsExperience": 20,
-      "certified": true,
-      "bio": "Coopérative de 15 tisserandes préservant l'art du tissage sérère traditionnel.",
-      "productsCount": 32
+      "id": 2,
+      "product_id": 1,
+      "color": "Indigo",
+      "pattern": "Géométrique",
+      "length_cm": 200,
+      "width_cm": 120,
+      "density": "Haute",
+      "created_at": "2024-04-01T00:00:00Z"
     },
     {
-      "id": "art-3",
-      "name": "Maison Seck",
-      "location": "Dakar",
-      "region": "Dakar",
-      "specialty": "Thioup",
-      "yearsExperience": 15,
-      "certified": true,
-      "bio": "Créateur de thioup contemporains alliant tradition et modernité pour le marché urbain.",
-      "productsCount": 28
+      "id": 3,
+      "product_id": 2,
+      "color": "Noir",
+      "pattern": "Symbolique",
+      "length_cm": 200,
+      "width_cm": 110,
+      "density": "Haute",
+      "created_at": "2024-04-02T00:00:00Z"
     },
     {
-      "id": "art-4",
-      "name": "Atelier Ashanti",
-      "location": "Kumasi",
-      "region": "Ghana",
-      "specialty": "Kente",
-      "yearsExperience": 40,
-      "certified": true,
-      "bio": "Maître tisserand kente perpétuant les motifs royaux traditionnels Ashanti.",
-      "productsCount": 22
+      "id": 4,
+      "product_id": 3,
+      "color": "Multicolore",
+      "pattern": "Moderne",
+      "length_cm": 150,
+      "width_cm": 100,
+      "density": "Moyenne",
+      "created_at": "2024-04-03T00:00:00Z"
+    }
+  ],
+  "units": [
+    { "id": 1, "name": "Pièce", "multiplier": 1 },
+    { "id": 2, "name": "Paire", "multiplier": 2 },
+    { "id": 3, "name": "Lot de 5", "multiplier": 5 },
+    { "id": 4, "name": "Bobine", "multiplier": 10 }
+  ],
+  "prices": [
+    {
+      "id": 1,
+      "product_variant_id": 1,
+      "unit_id": 1,
+      "price_type": "standard",
+      "amount": 15000,
+      "currency": "XOF",
+      "min_quantity": 10,
+      "created_at": "2024-04-01T00:00:00Z"
     },
     {
-      "id": "art-5",
-      "name": "Groupement Ségou",
-      "location": "Ségou",
-      "region": "Mali",
-      "specialty": "Bogolan",
-      "yearsExperience": 25,
-      "certified": true,
-      "bio": "Collectif d'artisans spécialisés dans la teinture bogolan selon les méthodes ancestrales Bambara.",
-      "productsCount": 38
+      "id": 2,
+      "product_variant_id": 1,
+      "unit_id": 1,
+      "price_type": "bulk",
+      "amount": 13500,
+      "currency": "XOF",
+      "min_quantity": 50,
+      "created_at": "2024-04-01T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "product_variant_id": 3,
+      "unit_id": 1,
+      "price_type": "standard",
+      "amount": 20000,
+      "currency": "XOF",
+      "min_quantity": 5,
+      "created_at": "2024-04-02T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "product_variant_id": 4,
+      "unit_id": 1,
+      "price_type": "standard",
+      "amount": 8000,
+      "currency": "XOF",
+      "min_quantity": 20,
+      "created_at": "2024-04-03T00:00:00Z"
+    }
+  ],
+  "stocks": [
+    {
+      "id": 1,
+      "product_variant_id": 1,
+      "unit_id": 1,
+      "artisan_id": 1,
+      "quantity_available": 150,
+      "updated_at": "2024-12-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "product_variant_id": 2,
+      "unit_id": 1,
+      "artisan_id": 1,
+      "quantity_available": 75,
+      "updated_at": "2024-12-01T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "product_variant_id": 3,
+      "unit_id": 1,
+      "artisan_id": 1,
+      "quantity_available": 200,
+      "updated_at": "2024-12-01T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "product_variant_id": 4,
+      "unit_id": 1,
+      "artisan_id": 1,
+      "quantity_available": 500,
+      "updated_at": "2024-12-01T00:00:00Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "reseller_id": 1,
+      "order_number": "CMD-2024-001",
+      "status": "delivered",
+      "total_amount": 450000,
+      "currency": "XOF",
+      "created_at": "2024-11-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "reseller_id": 1,
+      "order_number": "CMD-2024-002",
+      "status": "processing",
+      "total_amount": 275000,
+      "currency": "XOF",
+      "created_at": "2024-11-28T14:00:00Z"
+    },
+    {
+      "id": 3,
+      "reseller_id": 1,
+      "order_number": "CMD-2024-003",
+      "status": "pending",
+      "total_amount": 160000,
+      "currency": "XOF",
+      "created_at": "2024-12-01T09:00:00Z"
+    }
+  ],
+  "order_items": [
+    {
+      "id": 1,
+      "order_id": 1,
+      "product_variant_id": 1,
+      "unit_id": 1,
+      "quantity": 30,
+      "unit_price": 15000,
+      "total_price": 450000
+    },
+    {
+      "id": 2,
+      "order_id": 2,
+      "product_variant_id": 1,
+      "unit_id": 1,
+      "quantity": 10,
+      "unit_price": 15000,
+      "total_price": 150000
+    },
+    {
+      "id": 3,
+      "order_id": 2,
+      "product_variant_id": 4,
+      "unit_id": 1,
+      "quantity": 15,
+      "unit_price": 8000,
+      "total_price": 120000
+    },
+    {
+      "id": 4,
+      "order_id": 3,
+      "product_variant_id": 3,
+      "unit_id": 1,
+      "quantity": 8,
+      "unit_price": 20000,
+      "total_price": 160000
+    }
+  ],
+  "payment_methods": [
+    { "id": 1, "name": "Orange Money" },
+    { "id": 2, "name": "Wave" },
+    { "id": 3, "name": "Mobicash" },
+    { "id": 4, "name": "Virement Bancaire" }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "order_id": 1,
+      "payment_method_id": 1,
+      "reference": "OM-20241115-001",
+      "amount": 450000,
+      "status": "completed",
+      "paid_at": "2024-11-15T11:00:00Z"
+    },
+    {
+      "id": 2,
+      "order_id": 2,
+      "payment_method_id": 2,
+      "reference": "WV-20241128-001",
+      "amount": 275000,
+      "status": "pending",
+      "paid_at": null
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 1,
+      "order_id": 1,
+      "delivery_type": "standard",
+      "carrier": "DHL",
+      "tracking_number": "DHL-123456789",
+      "status": "delivered",
+      "estimated_date": "2024-11-20T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "order_id": 2,
+      "delivery_type": "express",
+      "carrier": "FedEx",
+      "tracking_number": "FX-987654321",
+      "status": "in_transit",
+      "estimated_date": "2024-12-03T00:00:00Z"
+    }
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "order_id": 1,
+      "invoice_number": "FAC-2024-001",
+      "issued_at": "2024-11-15T11:30:00Z",
+      "total_amount": 450000,
+      "currency": "XOF"
+    },
+    {
+      "id": 2,
+      "order_id": 2,
+      "invoice_number": "FAC-2024-002",
+      "issued_at": "2024-11-28T14:30:00Z",
+      "total_amount": 275000,
+      "currency": "XOF"
     }
   ],
   "features": [
-    {
-      "icon": "Shield",
-      "title": "Qualité Certifiée",
-      "description": "Tous nos tissus proviennent d'artisans vérifiés avec des certificats d'authenticité."
-    },
-    {
-      "icon": "Truck",
-      "title": "Livraison Fiable",
-      "description": "Expédition nationale et internationale avec suivi complet de vos commandes."
-    },
-    {
-      "icon": "Users",
-      "title": "Réseau d'Artisans",
-      "description": "Plus de 200 tisserands certifiés à travers le Sénégal et l'Afrique de l'Ouest."
-    },
-    {
-      "icon": "Award",
-      "title": "Prix Grossiste",
-      "description": "Tarifs préférentiels pour les revendeurs avec des quantités minimum adaptées."
-    }
+    { "icon": "Shield", "title": "Qualité Certifiée", "description": "Tous nos tissus proviennent d'artisans vérifiés avec des certificats d'authenticité." },
+    { "icon": "Truck", "title": "Livraison Fiable", "description": "Expédition nationale et internationale avec suivi complet de vos commandes." },
+    { "icon": "Users", "title": "Réseau d'Artisans", "description": "Plus de 200 tisserands certifiés à travers le Sénégal et l'Afrique de l'Ouest." },
+    { "icon": "Award", "title": "Prix Grossiste", "description": "Tarifs préférentiels pour les revendeurs avec des quantités minimum adaptées." }
   ],
-  "categories": [
-    {
-      "name": "Pagne Manjak",
-      "origin": "Casamance",
-      "image": "/images/categories/manjak.png"
-    },
-    {
-      "name": "Pagne Sérère",
-      "origin": "Sine-Saloum",
-      "image": "/images/categories/serere.png"
-    },
-    {
-      "name": "Thioup",
-      "origin": "Sénégal",
-      "image": "/images/categories/thioup.png"
-    },
-    {
-      "name": "Kente",
-      "origin": "Ghana",
-      "image": "/images/categories/kente.png"
-    }
+  "home_categories": [
+    { "name": "Pagne Manjak", "origin": "Casamance", "image": "/images/categories/manjak.png" },
+    { "name": "Pagne Sérère", "origin": "Sine-Saloum", "image": "/images/categories/serere.png" },
+    { "name": "Thioup", "origin": "Sénégal", "image": "/images/categories/thioup.png" },
+    { "name": "Kente", "origin": "Ghana", "image": "/images/categories/kente.png" }
   ],
   "stats": [
     { "value": "200+", "label": "Artisans Partenaires" },

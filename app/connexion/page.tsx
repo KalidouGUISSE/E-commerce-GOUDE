@@ -3,6 +3,7 @@
 import React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff, Lock, Mail, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -19,10 +20,14 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { login, isLoading, error } = useAuth()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await login({ email, password })
+    const success = await login({ email, password })
+    if (success) {
+      router.push("/tableau-de-bord")
+    }
   }
 
   return (

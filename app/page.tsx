@@ -5,12 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
-import db from "@/lib/data/db.json"
+import { homeCategories, features, stats, howItWorks } from "@/lib/data/index"
 
-const features = db.features
-const categories = db.categories
-const stats = db.stats
-const howItWorks = db.howItWorks
+const categories = homeCategories
 
 // Icon mapping
 const iconMap: Record<string, typeof Shield> = {
