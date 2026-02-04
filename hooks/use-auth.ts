@@ -46,7 +46,7 @@ export function useAuth() {
     initAuth()
   }, [])
 
-  const login = useCallback(async (credentials: LoginCredentials): Promise<boolean> => {
+  const login = useCallback(async (credentials: LoginCredentials): Promise<AuthUser | null> => {
     setIsLoading(true)
     setError(null)
 
@@ -59,14 +59,14 @@ export function useAuth() {
     if (!dbUser) {
       setError("Aucun compte trouvé avec cet email")
       setIsLoading(false)
-      return false
+      return null
     }
 
     // Check password
     if (credentials.password !== dbUser.password_hash) {
       setError("Mot de passe incorrect")
       setIsLoading(false)
-      return false
+      return null
     }
 
     // Determine role and company
@@ -111,7 +111,7 @@ export function useAuth() {
       localStorage.setItem("auth_user", JSON.stringify(authUser))
     }
     
-    return true
+    return authUser
   }, [])
 
   const logout = useCallback(() => {

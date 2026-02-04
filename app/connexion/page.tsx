@@ -19,14 +19,23 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { login, isLoading, error } = useAuth()
+  const { login, isLoading, error, user } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const success = await login({ email, password })
-    if (success) {
-      router.push("/tableau-de-bord")
+    const authUser = await login({ email, password })
+    if (authUser) {
+      // Redirect based on user role
+      if (authUser.role === "admin") {
+        router.push("/tableau-de-bord")
+      } else if (authUser.role === "reseller") {
+        router.push("/revendeur")
+      } else if (authUser.role === "artisan") {
+        router.push("/artisans")
+      } else {
+        router.push("/")
+      }
     }
   }
 
